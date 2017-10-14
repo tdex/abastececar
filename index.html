@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="pt-br" ng-app="myApp">
+
+<head>
+  <meta charset="utf-8" />
+  <title>AbasteceCar</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.css">
+  <link rel="stylesheet" href="" />
+</head>
+
+<body ng-controller="app">
+  <md-content class="md-padding" ng-cloak layout="column">
+    <header>
+      <h1>AbasteceCar</h1>
+    </header>
+
+    <div>
+      <form>
+        <label for="gasolia">Preço da gasolina {{precoGasolina}}</label>
+        <input type="number" id="gasolina" ng-bind="precoGasolina" placeholder="R$ 00,00">
+
+        <label for="consumo">Quantos Km/L o veículo faz?</label>
+        <input type="number" id="consumo" ng-bind="consumoCarro" placeholder="Km/L">
+
+        <label for="distancia">Qual a distância da viagem?</label>
+        <input type="number" id="distancia" ng-bind="distanciaViagem">
+
+
+      </form>
+    </div>
+
+  </md-content>
+  <!-- AngularJS Material Dependencies -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.11/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.11/angular-animate.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.11/angular-aria.min.js"></script>
+
+
+  <!-- AngularJS Material Javascript now available via Google CDN; version 1.1.4 used here -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.js"></script>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
