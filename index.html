@@ -25,14 +25,14 @@
           <label for="gasolia">Preço da gasolina</label>
           <div class="input-group">
             <span class="input-group-addon">R$</span>
-            <input type="number" class="form-control form-control-lg" id="gasolina" ng-model="precoGasolina" placeholder="00,00" required
-              ng-disabled="ativado">
+            <input type="number" min="0" class="form-control form-control-lg" id="gasolina" ng-model="precoGasolina" placeholder="00,00"
+              required ng-disabled="ativado">
           </div>
         </div>
         <div class="form-group">
           <label for="consumo">Consumo do veículo</label>
           <div class="input-group">
-            <input type="number" class="form-control form-control-lg" id="consumo" ng-model="consumoCarro" placeholder="00" required
+            <input type="number" min="0" class="form-control form-control-lg" id="consumo" ng-model="consumoCarro" placeholder="00" required
               ng-disabled="ativado">
             <span class="input-group-addon">Km/L</span>
           </div>
@@ -40,8 +40,8 @@
         <div class="form-group">
           <label for="distancia">Qual a distância da viagem?</label>
           <div class="input-group">
-            <input type="number" class="form-control form-control-lg" id="distancia" ng-model="distanciaViagem" placeholder="00" required
-              ng-disabled="ativado">
+            <input type="number" min="0" class="form-control form-control-lg" id="distancia" ng-model="distanciaViagem" placeholder="00"
+              required ng-disabled="ativado">
             <span class="input-group-addon">Km</span>
           </div>
         </div>
