@@ -4,44 +4,78 @@
 <head>
   <meta charset="utf-8" />
   <title>AbasteceCar</title>
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.css">
-  <link rel="stylesheet" href="" />
+  <meta name="description" content="Calcular o quanto de combustível é necessário para determinada distância.">
+  <meta name="keywords" content="Carro, Combustivel, Consumo, Gasolina, Alcool">
+  <meta name="author" content="Tarcísio Deschamps Silva">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="estilo.css" />
 </head>
 
-<body ng-controller="app">
-  <md-content class="md-padding" ng-cloak layout="column">
-    <header>
-      <h1>AbasteceCar</h1>
-    </header>
+<body ng-controller="app" class="container-fluid">
+  <header>
+    <h1>AbasteceCar</h1>
+  </header>
 
-    <div>
-      <form>
-        <label for="gasolia">Preço da gasolina {{precoGasolina}}</label>
-        <input type="number" id="gasolina" ng-bind="precoGasolina" placeholder="R$ 00,00">
+  <div class="card formulario">
+    <div class="card-body">
+      <form name="formulario">
+        <div class="form-group">
+          <label for="gasolia">Preço da gasolina</label>
+          <div class="input-group">
+            <span class="input-group-addon">R$</span>
+            <input type="number" class="form-control form-control-lg" id="gasolina" ng-model="precoGasolina" placeholder="00,00" required
+              ng-disabled="ativado">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="consumo">Consumo do veículo</label>
+          <div class="input-group">
+            <input type="number" class="form-control form-control-lg" id="consumo" ng-model="consumoCarro" placeholder="00" required
+              ng-disabled="ativado">
+            <span class="input-group-addon">Km/L</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="distancia">Qual a distância da viagem?</label>
+          <div class="input-group">
+            <input type="number" class="form-control form-control-lg" id="distancia" ng-model="distanciaViagem" placeholder="00" required
+              ng-disabled="ativado">
+            <span class="input-group-addon">Km</span>
+          </div>
+        </div>
 
-        <label for="consumo">Quantos Km/L o veículo faz?</label>
-        <input type="number" id="consumo" ng-bind="consumoCarro" placeholder="Km/L">
-
-        <label for="distancia">Qual a distância da viagem?</label>
-        <input type="number" id="distancia" ng-bind="distanciaViagem">
-
+        <button type="button" class="btn btn-primary" ng-click="calcularValorViagem(); ativado = true;" ng-hide="ativado" data-toggle="collapse"
+          data-target="#resultado" aria-expanded="false" aria-controls="resultado" ng-disabled="formulario.$invalid">Calcular</button>
+        <button type="button" class="btn btn-secondary" ng-click="ativado = false;" ng-show="ativado" data-toggle="collapse" data-target="#resultado"
+          aria-expanded="false" aria-controls="resultado">Voltar</button>
 
       </form>
+      <div class="collapse" id="resultado">
+        <br>
+        <div class="card card-body">
+          <label>Abastecimento necessário:</label>
+          <h2 ng-bind="'R$ ' + (valorViagem | number: 2)"></h2>
+        </div>
+      </div>
     </div>
+  </div>
 
-  </md-content>
   <!-- AngularJS Material Dependencies -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.11/angular.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.11/angular-animate.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.11/angular-aria.min.js"></script>
+
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+    crossorigin="anonymous"></script>
+</body>
 
 
-  <!-- AngularJS Material Javascript now available via Google CDN; version 1.1.4 used here -->
-  <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.js"></script>
-
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 
 </html>
