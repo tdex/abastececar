@@ -21,49 +21,72 @@
     <h1>AbasteceCar</h1>
   </header>
 
-  <div class="card formulario">
-    <div class="card-body">
-      <form name="formulario">
-        <div class="form-group">
-          <label for="gasolia">Preço do combustível</label>
-          <div class="input-group">
-            <span class="input-group-addon">R$</span>
-            <input type="number" title="Preço atual do combustível" min="0" class="form-control form-control-lg"
-              id="gasolina" ng-model="precoGasolina" placeholder="00,00" required ng-disabled="ativado">
+  <div class="flip">
+    <div class="card formulario">
+      <div class="card-body card-face">
+        <form name="formulario">
+          <div class="form-group">
+            <label for="gasolia">Preço do combustível</label>
+            <div class="input-group">
+              <span class="input-group-addon">R$</span>
+              <input type="number" title="Preço atual do combustível" min="0" class="form-control form-control-lg"
+                id="gasolina" ng-model="precoGasolina" placeholder="00,00" required ng-disabled="ativado">
+            </div>
           </div>
-        </div>
-        <div class="form-group">
-          <label for="consumo">Consumo do veículo</label>
-          <div class="input-group">
-            <input type="number" title="km/L do veículo" min="0" class="form-control form-control-lg" id="consumo"
-              ng-model="consumoCarro" placeholder="00" required ng-disabled="ativado">
-            <span class="input-group-addon">Km/L</span>
+          <div class="form-group">
+            <label for="consumo">Consumo do veículo</label>
+            <div class="input-group">
+              <input type="number" title="km/L do veículo" min="0" class="form-control form-control-lg" id="consumo"
+                ng-model="consumoCarro" placeholder="00" required ng-disabled="ativado">
+              <span class="input-group-addon">Km/L</span>
+            </div>
           </div>
-        </div>
-        <div class="form-group">
-          <label for="distancia">Qual a distância da viagem?</label>
-          <div class="input-group">
-            <input type="number" title="Distância da viagem" min="0" class="form-control form-control-lg" id="distancia"
-              ng-model="distanciaViagem" placeholder="00" required ng-disabled="ativado">
-            <span class="input-group-addon">Km</span>
+          <div class="form-group">
+            <label for="distancia">Qual a distância da viagem?</label>
+            <div class="input-group">
+              <input type="number" title="Distância da viagem" min="0" class="form-control form-control-lg"
+                id="distancia" ng-model="distanciaViagem" placeholder="00" required ng-disabled="ativado">
+              <span class="input-group-addon">Km</span>
+            </div>
+          </div>
+
+          <button type="button" class="btn btn-primary" title="Calcular viagem"
+            ng-click="calcularValorViagem(); ativado = true;" ng-hide="ativado" data-toggle="collapse"
+            data-target="#resultado" aria-expanded="false" aria-controls="resultado"
+            ng-disabled="formulario.$invalid">Calcular</button>
+          <button type="button" class="btn btn-secondary" title="Voltar" ng-click="ativado = false;" ng-show="ativado"
+            data-toggle="collapse" data-target="#resultado" aria-expanded="false"
+            aria-controls="resultado">Voltar</button>
+        </form>
+
+        <div class="collapse" id="resultado">
+          <br>
+          <div class="card card-body">
+            <label>Abastecimento necessário:</label>
+            <h2 ng-bind="'R$ ' + (valorViagem | number: 2)"></h2>
           </div>
         </div>
 
-        <button type="button" class="btn btn-primary" title="Calcular viagem"
-          ng-click="calcularValorViagem(); ativado = true;" ng-hide="ativado" data-toggle="collapse"
-          data-target="#resultado" aria-expanded="false" aria-controls="resultado"
-          ng-disabled="formulario.$invalid">Calcular</button>
-        <button type="button" class="btn btn-secondary" title="Voltar" ng-click="ativado = false;" ng-show="ativado"
-          data-toggle="collapse" data-target="#resultado" aria-expanded="false"
-          aria-controls="resultado">Voltar</button>
+        <div class="show-log" title="Histórico" data-toggle="tooltip" data-placement="left"></div>
+      </div>
 
-      </form>
-      <div class="collapse" id="resultado">
-        <br>
-        <div class="card card-body">
-          <label>Abastecimento necessário:</label>
-          <h2 ng-bind="'R$ ' + (valorViagem | number: 2)"></h2>
+      <div class="card-body card-back">
+        <div class="log row">
+          <div class="col-6">Combustível: x,xx</div>
+          <div class="col-6">Consumo: x,xx</div>
+          <div class="col-6">Distância: 000</div>
+          <div class="col-6">Valor: X,XX</div>
+          <hr>
         </div>
+        <div class="log row">
+          <div class="col-6">Combustível: x,xx</div>
+          <div class="col-6">Consumo: x,xx</div>
+          <div class="col-6">Distância: 000</div>
+          <div class="col-6">Valor: X,XX</div>
+          <hr>
+        </div>
+
+        <div class="show-log" title="Voltar" data-toggle="tooltip" data-placement="right"></div>
       </div>
     </div>
   </div>
@@ -79,6 +102,15 @@
     integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
     crossorigin="anonymous"></script>
   <script src="script.js"></script>
+  <script>
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip();
+
+      $('.show-log').click(() => {
+        $('.card').toggleClass('card-fliped')
+      })
+    })
+  </script>
 </body>
 
 </html>
