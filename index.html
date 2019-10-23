@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="estilo.css" />
   <!-- AngularJS Material Dependencies -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.11/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.10/ngStorage.min.js"></script>
 
 </head>
 
@@ -22,21 +23,21 @@
   </header>
 
   <div class="card formulario">
-    <div class="card-body">
+    <div class="card-body card-face">
       <form name="formulario">
         <div class="form-group">
           <label for="gasolia">Preço do combustível</label>
           <div class="input-group">
             <span class="input-group-addon">R$</span>
             <input type="number" title="Preço atual do combustível" min="0" class="form-control form-control-lg"
-              id="gasolina" ng-model="precoGasolina" placeholder="00,00" required ng-disabled="ativado">
+              id="gasolina" ng-model="viagem.precoGasolina" placeholder="00,00" required ng-disabled="ativado">
           </div>
         </div>
         <div class="form-group">
           <label for="consumo">Consumo do veículo</label>
           <div class="input-group">
             <input type="number" title="km/L do veículo" min="0" class="form-control form-control-lg" id="consumo"
-              ng-model="consumoCarro" placeholder="00" required ng-disabled="ativado">
+              ng-model="viagem.consumoCarro" placeholder="00" required ng-disabled="ativado">
             <span class="input-group-addon">Km/L</span>
           </div>
         </div>
@@ -44,7 +45,7 @@
           <label for="distancia">Qual a distância da viagem?</label>
           <div class="input-group">
             <input type="number" title="Distância da viagem" min="0" class="form-control form-control-lg" id="distancia"
-              ng-model="distanciaViagem" placeholder="00" required ng-disabled="ativado">
+              ng-model="viagem.distanciaViagem" placeholder="00" required ng-disabled="ativado">
             <span class="input-group-addon">Km</span>
           </div>
         </div>
@@ -56,15 +57,40 @@
         <button type="button" class="btn btn-secondary" title="Voltar" ng-click="ativado = false;" ng-show="ativado"
           data-toggle="collapse" data-target="#resultado" aria-expanded="false"
           aria-controls="resultado">Voltar</button>
-
       </form>
+
       <div class="collapse" id="resultado">
         <br>
         <div class="card card-body">
           <label>Abastecimento necessário:</label>
-          <h2 ng-bind="'R$ ' + (valorViagem | number: 2)"></h2>
+          <h2 ng-bind="'R$ ' + (viagem.valorViagem | number: 2)"></h2>
         </div>
       </div>
+
+      <div class="show-log" title="Histórico" data-toggle="tooltip" data-placement="left"></div>
+    </div>
+
+    <div class="card-body card-back">
+      <h4>Histórico</h4>
+
+      <div ng-show='!historico.length'>
+        <hr>
+        <div class="alert alert-warning mb-0" role="alert">
+          Não existem dados anteriores!
+        </div>
+      </div>
+
+      <div ng-show='historico.length' ng-repeat='hist in historico | orderBy:"+": true track by $index'>
+        <hr>
+        <div class="log row">
+          <div class="col-12 col-sm-6">Combustível: {{hist.precoGasolina | currency:'R$'}}</div>
+          <div class="col-12 col-sm-6">Consumo: {{hist.consumoCarro}} Km/L</div>
+          <div class="col-12 col-sm-6">Distância: {{hist.distanciaViagem}} Km</div>
+          <div class="col-12 col-sm-6">Valor: <strong>{{hist.valorViagem | currency:'R$'}}</strong></div>
+        </div>
+      </div>
+
+      <div class="show-log" title="Voltar" data-toggle="tooltip" data-placement="left"></div>
     </div>
   </div>
 
@@ -79,6 +105,15 @@
     integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
     crossorigin="anonymous"></script>
   <script src="script.js"></script>
+  <script>
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip();
+
+      $('.show-log').click(() => {
+        $('.card').toggleClass('card-fliped')
+      })
+    })
+  </script>
 </body>
 
 </html>
