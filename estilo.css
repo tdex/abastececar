@@ -60,3 +60,21 @@ header h1 {
 label {
   font-weight: bold;
 }
+
+.historico header {
+  display: flex;
+  align-items: baseline;
+}
+
+.historico header * {
+  position: relative;
+  display: inline-block;
+}
+
+.historico header {
+  font-size: 1.2em;
+}
+
+.historico header button {
+  margin-left: 1em;
+}

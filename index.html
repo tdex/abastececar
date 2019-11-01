@@ -14,7 +14,7 @@
   <!-- AngularJS Material Dependencies -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.11/angular.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.10/ngStorage.min.js"></script>
-
+  <script src="https://kit.fontawesome.com/c12600d7f2.js" crossorigin="anonymous"></script>
 </head>
 
 <body ng-controller="app" class="container-fluid">
@@ -67,11 +67,14 @@
         </div>
       </div>
 
-      <div class="show-log" title="Histórico" data-toggle="tooltip" data-placement="left"></div>
+      <div class="show-log" title="Histórico"></div>
     </div>
 
-    <div class="card-body card-back">
-      <h4>Histórico</h4>
+    <div class="historico card-body card-back">
+      <header>
+        <strong>Histórico</strong>
+        <button class="btn btn-outline-danger far fa-trash-alt" ng-click="excluirHistorico()" title="Excluir histórico"/>
+      </header>
 
       <div ng-show='!historico.length'>
         <hr>
@@ -90,7 +93,7 @@
         </div>
       </div>
 
-      <div class="show-log" title="Voltar" data-toggle="tooltip" data-placement="left"></div>
+      <div class="show-log" title="Voltar"></div>
     </div>
   </div>
 
@@ -107,8 +110,6 @@
   <script src="script.js"></script>
   <script>
     $(function () {
-      $('[data-toggle="tooltip"]').tooltip();
-
       $('.show-log').click(() => {
         $('.card').toggleClass('card-fliped')
       })

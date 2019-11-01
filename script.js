@@ -29,6 +29,11 @@ app.controller('app', ($scope, $localStorage) => {
     vm.historico = $localStorage.historico ? JSON.parse($localStorage.historico) : [];
   };
 
+  vm.excluirHistorico = () => {
+    delete $localStorage.historico;
+    vm.historico = [];
+  }
+
   getHistorico();
 
 });
